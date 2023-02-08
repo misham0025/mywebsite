@@ -16,14 +16,13 @@ const useStyles = createStyles((theme) => ({
   inner: {
     display: 'flex',
     justifyContent: 'space-between',
-    paddingTop: theme.spacing.xl * 3,
-    paddingBottom: theme.spacing.xl * 5,
+    paddingTop: theme.spacing.xl * 4,
+    paddingBottom: theme.spacing.xl * 3,
   },
 
   content: {
     maxWidth: 700,
-    marginRight: theme.spacing.xl * 5,
-
+    marginRight: theme.spacing.xl * 3,
     [theme.fn.smallerThan('md')]: {
       maxWidth: '100%',
       marginRight: 0,
@@ -32,9 +31,9 @@ const useStyles = createStyles((theme) => ({
 
   title: {
     color: theme.colorScheme === 'dark' ? theme.white : theme.black,
-    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-    fontSize: 50,
-    lineHeight: 1.3,
+    fontFamily: `Verdana, ${theme.fontFamily}`,
+    fontSize: 42,
+    lineHeight: 1.5,
     fontWeight: 900,
 
     [theme.fn.smallerThan('xs')]: {
@@ -50,26 +49,25 @@ const useStyles = createStyles((theme) => ({
 
   image: {
     flex: 1,
-
     [theme.fn.smallerThan('md')]: {
       display: 'none',
     },
   },
 
- 
+
 }));
 
 function Header() {
   const { classes } = useStyles();
   return (
     <div>
-      <Container  size="xl" px="xl">
+      <Container size="xl" px="xl">
         <div className={classes.inner}>
           <div className={classes.content}>
             <Title className={classes.title}>
-              A Modern React Components <br /> With Functionalities
+              A Modern React Web Application
             </Title>
-            <Text color="dimmed" mt="md">
+            <Text color="dimmed" mt="md" style={{ textAlign: 'justify' }}>
               Build fully functional accessible web applications faster than ever – Mantine includes
               more than 120 customizable components and hooks to cover you in any situation
             </Text>
@@ -80,7 +78,7 @@ function Header() {
               size="sm"
               icon={
                 <ThemeIcon color='teal' size={20} radius="xl">
-                  <IconCheck  size={12} stroke={1.5} />
+                  <IconCheck size={12} stroke={1.5} />
                 </ThemeIcon>
               }
             >
@@ -99,12 +97,15 @@ function Header() {
             </List>
 
             <Group mt={30}>
-            <Button color="teal">
-               Explore
+              <Button color="teal" size="md">
+                Explore
               </Button>
             </Group>
           </div>
-          <Image src='https://cdn.pixabay.com/photo/2015/10/01/17/17/car-967387__480.png' width={500}  className={classes.image} />
+          <div style={{ display: "flex", justifyContent: 'center', alignItems: "center" }}>
+            <Image src='https://www.kindpng.com/picc/m/271-2713117_team-work-hd-png-download.png'
+             width={600} className={classes.image} />
+          </div>
         </div>
       </Container>
     </div>

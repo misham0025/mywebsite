@@ -1,5 +1,7 @@
 import React from "react";
 import { useState } from "react";
+import {Link} from "react-router-dom";
+import { Outlet } from 'tabler-icons-react'
 import {
   createStyles,
   Header,
@@ -116,20 +118,20 @@ function Navbar() {
             spacing={0}
             className={classes.hiddenMobile}
           >
-            <a href="#" className={classes.link}>
+            <Link to='/head' className={classes.link}>
              Home
-            </a>
-            <a href="#" className={classes.link}>
+            </Link>
+            <Link to='/provu' className={classes.link}>
              Products
-            </a>
-            <a href="#" className={classes.link}>
+            </Link>
+            <Link to="/prod" className={classes.link}>
              About
-            </a>
-            <a href="#" className={classes.link}>
+            </Link>
+            <Link to="/foo" className={classes.link}>
              Contact
-            </a>
-            <a href="#" className={classes.link}>
-             <IconShoppingBag /> Cart
+            </Link>
+            <a href="#"  className={classes.link}>
+             <IconShoppingBag  /> Cart
             </a>
         
             {login ? (
@@ -184,6 +186,7 @@ function Navbar() {
         </ScrollArea>
       </Drawer>
     </Box>
+   
   );
 }
 
