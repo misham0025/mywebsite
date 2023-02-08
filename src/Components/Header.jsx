@@ -104,7 +104,7 @@ function Header() {
               </Button>
             </Group>
           </div>
-          <Image src='anc' width={100}  className={classes.image} />
+          <Image src='https://cdn.pixabay.com/photo/2015/10/01/17/17/car-967387__480.png' width={500}  className={classes.image} />
         </div>
       </Container>
     </div>
