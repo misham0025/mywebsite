@@ -161,9 +161,9 @@ function Navbar() {
             <Link to="/contact" className={classes.link}>
               Contact
             </Link>
-            <a href="/cart" className={classes.link}>
+            <Link to="/cart" className={classes.link}>
               <IconShoppingBag /> Cart
-            </a>
+            </Link>
 
             {login ? (
               <Button color="teal">LOGIN</Button>
@@ -211,9 +211,9 @@ function Navbar() {
           <Link to="/contact" className={classes.link}>
             Contact
           </Link>
-          <a href="/cart" className={classes.link}>
-            <IconShoppingBag /> Cart
-          </a>
+          <Link to="/cart" className={classes.link}>
+              <IconShoppingBag /> Cart
+            </Link>
 
           <Divider
             my="sm"
