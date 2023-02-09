@@ -31,10 +31,12 @@ function Productview() {
         height:"100vh",
         width: "100%",
         display: "flex",
+        alignItems:"center",
         justifyContent: "center",
        
       }}
-    ><Text>Coming Soon</Text><Loader color="teal" size="lg" variant="dots" /></div>
+    ><Text>Coming Soon</Text><Loader color="teal" size="lg" variant="dots" />
+    </div>
   );
 }
 

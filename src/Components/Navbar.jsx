@@ -155,13 +155,13 @@ function Navbar() {
             <Link to="/prod" className={classes.link}>
               Products
             </Link>
-            <Link to="*" className={classes.link}>
+            <Link to="/about" className={classes.link}>
               About
             </Link>
-            <Link to="/foo" className={classes.link}>
+            <Link to="/contact" className={classes.link}>
               Contact
             </Link>
-            <a href="#" className={classes.link}>
+            <a href="/cart" className={classes.link}>
               <IconShoppingBag /> Cart
             </a>
 
@@ -190,20 +190,29 @@ function Navbar() {
       <Drawer
         opened={drawerOpened}
         onClose={closeDrawer}
-        size="100%"
+        transition="rotate-left"
+        transitionDuration={250}
+        transitionTimingFunction="ease"
+        size="50%"
         padding="md"
         className={classes.hiddenDesktop}
         zIndex={1000000}
       >
         <ScrollArea sx={{ height: "calc(100vh - 60px)" }} mx="-md">
-          <a href="#" className={classes.link}>
+          <Link to="/head" className={classes.link}>
             Home
-          </a>
-          <a href="#" className={classes.link}>
-            Learn
-          </a>
-          <a href="#" className={classes.link}>
-            Academy
+          </Link>
+          <Link to="/prod" className={classes.link}>
+            Products
+          </Link>
+          <Link to="/about" className={classes.link}>
+            About
+          </Link>
+          <Link to="/contact" className={classes.link}>
+            Contact
+          </Link>
+          <a href="/cart" className={classes.link}>
+            <IconShoppingBag /> Cart
           </a>
 
           <Divider
@@ -213,9 +222,16 @@ function Navbar() {
 
           <Group position="center" pb="xl" px="md">
             {login ? (
-              <Button variant="default">Log in</Button>
+              <Button color="teal">LOGIN</Button>
             ) : (
-              <Button>Sign up</Button>
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <Text style={{ paddingRight: "20px", color: "black" }}>
+                  Hi' Misham
+                </Text>
+                <Button variant="outline" color="red">
+                  LOGOUT
+                </Button>
+              </div>
             )}
           </Group>
         </ScrollArea>
