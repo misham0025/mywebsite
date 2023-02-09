@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import {Link} from "react-router-dom";
-import { Outlet } from 'tabler-icons-react'
+import { Link } from "react-router-dom";
 import {
   createStyles,
   Header,
@@ -20,13 +19,14 @@ import {
   Drawer,
   Collapse,
   ScrollArea,
+  TextInput,
+  TextInputProps,
+  ActionIcon,
+  useMantineTheme,
 } from "@mantine/core";
 import { MantineLogo } from "@mantine/ds";
 import { useDisclosure } from "@mantine/hooks";
-import {
- 
-  IconShoppingBag 
-} from "@tabler/icons-react";
+import { IconSearch, IconShoppingBag } from "@tabler/icons-react";
 
 function Navbar() {
   const useStyles = createStyles((theme) => ({
@@ -55,7 +55,20 @@ function Navbar() {
             : theme.colors.gray[0],
       }),
     },
-
+    textinput: {
+      // '@media (max-width: 1440px)': {
+      //   width:"700px"
+      //  },
+      "@media (min-width: 1024px) and (max-width: 2560px)": {
+        width: "650px",
+      },
+      "@media (min-width: 768px) and (max-width: 1024px)": {
+        width: "400px",
+      },
+      "@media (min-width: 300px) and (max-width: 768px)": {
+        width: "180px",
+      },
+    },
     subLink: {
       width: "100%",
       padding: `${theme.spacing.xs}px ${theme.spacing.md}px`,
@@ -108,38 +121,60 @@ function Navbar() {
 
   return (
     <Box>
-      <Header style={{border:"none",backgroundColor:"transparent"}} height={60} px="md">
+      <Header
+        style={{ border: "none", backgroundColor: "transparent" }}
+        height={60}
+        px="md"
+      >
         <Group position="apart" sx={{ height: "100%" }}>
           <Group>
-           <img src="https://images.vexels.com/media/users/3/207136/isolated/preview/dc6980a67acd5e2d4a13bc446e9e3378-green-leaf-big-icon.png" width={50} alt="" />
+            <img
+              src="https://images.vexels.com/media/users/3/207136/isolated/preview/dc6980a67acd5e2d4a13bc446e9e3378-green-leaf-big-icon.png"
+              width={30}
+              alt=""
+            />
+          </Group>
+
+          <Group>
+            <TextInput
+              icon={<IconSearch size={18} stroke={1.5} />}
+              radius="md"
+              placeholder="Search"
+              size="md"
+              className={classes.textinput}
+            />
           </Group>
           <Group
             sx={{ height: "100%" }}
             spacing={0}
             className={classes.hiddenMobile}
           >
-            <Link to='/head' className={classes.link}>
-             Home
+            <Link to="/head" className={classes.link}>
+              Home
             </Link>
-            <Link to='/provu' className={classes.link}>
-             Products
+            <Link to="/provu" className={classes.link}>
+              Products
             </Link>
             <Link to="/prod" className={classes.link}>
-             About
+              About
             </Link>
             <Link to="/foo" className={classes.link}>
-             Contact
+              Contact
             </Link>
-            <a href="#"  className={classes.link}>
-             <IconShoppingBag  /> Cart
+            <a href="#" className={classes.link}>
+              <IconShoppingBag /> Cart
             </a>
-        
+
             {login ? (
               <Button color="teal">LOGIN</Button>
             ) : (
-              <div style={{display:"flex", alignItems:"center"}}>
-                <Text style={{paddingRight:"20px",color:"black"}}>Hi' Misham</Text>
-                <Button color="red">LOGOUT</Button>
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <Text style={{ paddingRight: "20px", color: "black" }}>
+                  Hi' Misham
+                </Text>
+                <Button variant="outline" color="red">
+                  LOGOUT
+                </Button>
               </div>
             )}
           </Group>
@@ -186,7 +221,6 @@ function Navbar() {
         </ScrollArea>
       </Drawer>
     </Box>
-   
   );
 }
 
