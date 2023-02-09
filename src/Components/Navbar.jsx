@@ -152,10 +152,10 @@ function Navbar() {
             <Link to="/head" className={classes.link}>
               Home
             </Link>
-            <Link to="/provu" className={classes.link}>
+            <Link to="/prod" className={classes.link}>
               Products
             </Link>
-            <Link to="/prod" className={classes.link}>
+            <Link to="*" className={classes.link}>
               About
             </Link>
             <Link to="/foo" className={classes.link}>

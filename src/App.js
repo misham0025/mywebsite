@@ -11,6 +11,8 @@ import Footer from './Components/Footer';
 import Login from './Components/Login';
 import Page404 from './Components/Page404';
 import Header from './Components/Header';
+import Navbar from './Components/Navbar';
+
 
 
 function App() {
@@ -23,7 +25,7 @@ function App() {
           <Route path="/" element={<Portal />} >
             <Route path="/head" element={<Header />} />
             <Route path="/prod" element={<Products />} />
-            <Route path="/provu" element={<Productview />} />
+            <Route path="/provu/:id" element={<Productview />} />
             <Route path="/foo" element={<Footer />} />
           </Route>
         </Routes>
