@@ -24,18 +24,18 @@ const useStyles = createStyles((theme) => ({
     backgroundColor:
       theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
     width: "400px",
-    minHeight:"400px",
+    maxHeight:"600px",
     margin: "10px",
   },
 
   imageSection: {
-    padding: theme.spacing.md,
+   // padding: theme.spacing.md,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    borderBottom: `1px solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-    }`,
+    // borderBottom: `1px solid ${
+    //   theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
+    // }`,
   },
 
   label: {
@@ -94,17 +94,18 @@ const[loading,setLoading]=useState(false)
       }}
     >
       {
-        loading? <div style={{width:"100%",height:"100vh", display:"flex",justifyContent:"center",alignItems:"center"}}><Loader size="lg" variant="dots" /></div>  : 
+        loading? <div style={{width:"100%",height:"100vh", display:"flex",justifyContent:"center",alignItems:"center"}}><Loader color="teal" size="lg" variant="dots" /></div>  : 
         <>
          {proddet.map((item, index) => {
         return (
-          <Card key={index} withBorder radius="md" className={classes.card}>
+          <Card key={index}  radius="md" className={classes.card}>
+
             <Card.Section className={classes.imageSection}>
-              <Image src={item.images[0]} width={300} alt="Tesla Model S" />
+              <Image src={item.images[0]} width={200} height={200} alt="Tesla Model S" />
             </Card.Section>
 
-            <Group position="apart" mt="md">
-              <div  width={300}>
+            <Group position="apart" mt="md" width={300} height={300}>
+              <div  >
                 <Text weight={500}>{item.title}</Text>
                 <Text size="xs" color="dimmed">
                   {item.description}
@@ -112,7 +113,7 @@ const[loading,setLoading]=useState(false)
               </div>
               <Badge variant="outline">{item.discountPercentage}% off</Badge>
             </Group>
-            <Card.Section className={classes.section}>
+            <Card.Section className={classes.section} width={100} height={100}>
               <Group spacing={30}>
                 <div>
                   <Text size="xl" weight={700} sx={{ lineHeight: 1 }}>
