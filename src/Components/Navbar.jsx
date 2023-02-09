@@ -1,5 +1,6 @@
 import React from "react";
-import { useState } from "react";
+import {  useEffect, useState } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import {
   createStyles,
@@ -118,7 +119,20 @@ function Navbar() {
 
   const { classes, theme } = useStyles();
   const [login, setLogin] = useState(true);
+  const [stringValue, setStringValue] = useState('');
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    loadData();
+  }, [stringValue]);
 
+  const loadData = async () => {
+    let response = await axios.get(
+      `https://dummyjson.com/products/search?q=${stringValue}`
+    );
+    let res = response.data;
+    setData(res.products)
+    console.log(res.products);
+  };
   return (
     <Box>
       <Header
@@ -142,7 +156,10 @@ function Navbar() {
               placeholder="Search"
               size="md"
               className={classes.textinput}
-            />
+              onChange={(event) => setStringValue(event.currentTarget.value)}
+            >
+             
+            </TextInput>
           </Group>
           <Group
             sx={{ height: "100%" }}
