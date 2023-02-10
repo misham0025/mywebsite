@@ -121,6 +121,8 @@ function Navbar() {
   const [login, setLogin] = useState(true);
   const [stringValue, setStringValue] = useState('');
   const [data, setData] = useState([]);
+
+  
   useEffect(() => {
     loadData();
   }, [stringValue]);
@@ -175,7 +177,7 @@ function Navbar() {
             <Link to="/about" className={classes.link}>
               About
             </Link>
-            <Link to="/contact" className={classes.link}>
+            <Link to="/contact" className={classes.link} >
               Contact
             </Link>
             <Link to="/cart" className={classes.link}>
@@ -207,10 +209,11 @@ function Navbar() {
       <Drawer
         opened={drawerOpened}
         onClose={closeDrawer}
+        onClick={toggleDrawer}
         transition="rotate-left"
         transitionDuration={250}
         transitionTimingFunction="ease"
-        size="50%"
+        size="100%"
         padding="md"
         className={classes.hiddenDesktop}
         zIndex={1000000}
