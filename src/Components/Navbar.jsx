@@ -1,7 +1,7 @@
 import React from "react";
 import {  useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   createStyles,
   Header,
@@ -28,6 +28,7 @@ import {
 import { MantineLogo } from "@mantine/ds";
 import { useDisclosure } from "@mantine/hooks";
 import { IconSearch, IconShoppingBag } from "@tabler/icons-react";
+
 
 function Navbar() {
   const useStyles = createStyles((theme) => ({
@@ -121,11 +122,19 @@ function Navbar() {
   const [login, setLogin] = useState(true);
   const [stringValue, setStringValue] = useState('');
   const [data, setData] = useState([]);
-
+  const navigate=useNavigate()
+  const remove=()=>{
+    localStorage.removeItem("token");
+    navigate("/")    
+  }
+  const add=()=>{
+    localStorage.setItem("token", Date.now())
+    navigate("/prod")
+  }
   
   useEffect(() => {
     loadData();
-  }, [stringValue]);
+  }, []);
 
   const loadData = async () => {
     let response = await axios.get(
@@ -145,8 +154,8 @@ function Navbar() {
         <Group position="apart" sx={{ height: "100%" }}>
           <Group>
             <img
-              src="https://images.vexels.com/media/users/3/207136/isolated/preview/dc6980a67acd5e2d4a13bc446e9e3378-green-leaf-big-icon.png"
-              width={30}
+              src="https://cdn-icons-png.flaticon.com/512/7838/7838457.png"
+              width={50}
               alt=""
             />
           </Group>
@@ -168,7 +177,7 @@ function Navbar() {
             spacing={0}
             className={classes.hiddenMobile}
           >
-            <Link to="/head" className={classes.link}>
+            <Link to="/" className={classes.link}>
               Home
             </Link>
             <Link to="/prod" className={classes.link}>
@@ -184,14 +193,14 @@ function Navbar() {
               <IconShoppingBag /> Cart
             </Link>
 
-            {login ? (
-              <Button color="teal">LOGIN</Button>
+            { !localStorage.getItem("token") ? (
+             <Link ><Button color="teal" onClick={add}>LOGIN</Button></Link>
             ) : (
               <div style={{ display: "flex", alignItems: "center" }}>
                 <Text style={{ paddingRight: "20px", color: "black" }}>
                   Hi' Misham
                 </Text>
-                <Button variant="outline" color="red">
+                <Button onClick={remove} variant="outline" color="red">
                   LOGOUT
                 </Button>
               </div>
@@ -219,7 +228,7 @@ function Navbar() {
         zIndex={1000000}
       >
         <ScrollArea sx={{ height: "calc(100vh - 60px)" }} mx="-md">
-          <Link to="/head" className={classes.link}>
+          <Link to="/" className={classes.link}>
             Home
           </Link>
           <Link to="/prod" className={classes.link}>
@@ -241,14 +250,14 @@ function Navbar() {
           />
 
           <Group position="center" pb="xl" px="md">
-            {login ? (
-              <Button color="teal">LOGIN</Button>
+            { !localStorage.getItem("token") ? (
+              <Link ><Button color="teal" onClick={add}>LOGIN</Button></Link>
             ) : (
               <div style={{ display: "flex", alignItems: "center" }}>
                 <Text style={{ paddingRight: "20px", color: "black" }}>
                   Hi' Misham
                 </Text>
-                <Button variant="outline" color="red">
+                <Button onClick={remove} variant="outline" color="red">
                   LOGOUT
                 </Button>
               </div>

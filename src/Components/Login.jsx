@@ -12,7 +12,7 @@ function Login() {
       justifyContent: "center",
      
     }}
-  ><Text>Coming Soon</Text><Loader color="teal" size="lg" variant="dots" />
+  ><Text>Login page will Come Soon</Text><Loader color="teal" size="lg" variant="dots" />
   </div>
   )
 }
