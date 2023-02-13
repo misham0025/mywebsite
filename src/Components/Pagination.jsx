@@ -3,7 +3,7 @@ import { Pagination } from '@mantine/core';
 
 function Paginationn() {
   return (
-    <Pagination total={10} color="teal" />
+    <Pagination total={5} color="teal"  />
   )
 }
 
