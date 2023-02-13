@@ -9,6 +9,7 @@ import {
   Center,
   Button,
   Loader,
+  Container,
 } from "@mantine/core";
 
 import axios from "axios";
@@ -17,43 +18,22 @@ import { useQuery } from "react-query";
 
 const useStyles = createStyles((theme) => ({
   card: {
-    backgroundColor:
-      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
-    width: "400px",
-    maxHeight: "600px",
+    backgroundColor: "#90EE90",
+    width: "500px",
+    Height: "900px",
     margin: "10px",
   },
 
-  imageSection: {
-    // padding: theme.spacing.md,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    // borderBottom: `1px solid ${
-    //   theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-    // }`,
-  },
+  imageSection: {},
 
-  label: {
-    marginBottom: theme.spacing.xs,
-    lineHeight: 1,
-    fontWeight: 700,
-    fontSize: theme.fontSizes.xs,
-    letterSpacing: -0.25,
-    textTransform: "uppercase",
-  },
+  label: {},
 
   section: {
     display: "flex",
     justifyContent: "space-between",
-    padding: theme.spacing.md,
-    borderTop: `1px solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-    }`,
   },
 
   icon: {
-    marginRight: 5,
     color:
       theme.colorScheme === "dark"
         ? theme.colors.dark[2]
@@ -66,22 +46,20 @@ function Products() {
   const [proddet, setProddet] = useState([]);
   const [loading, setLoading] = useState(false);
 
- 
-
   useEffect(() => {
     loadData();
   }, []);
 
-
   const loadData = async () => {
-    setLoading(true)
-    let response = await axios.get("https://exuberant-pinafore-tick.cyclic.app/productDetails");
-    let res = response.data
-    setProddet(res)
-    console.log(res)
-    setLoading(false)
+    setLoading(true);
+    let response = await axios.get(
+      "https://exuberant-pinafore-tick.cyclic.app/productDetails"
+    );
+    let res = response.data;
+    setProddet(res);
+    console.log(res);
+    setLoading(false);
   };
-
 
   return (
     <div
@@ -89,6 +67,8 @@ function Products() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        width: "100%",
+        height: "max-content",
         flexWrap: "wrap",
       }}
     >
@@ -100,6 +80,7 @@ function Products() {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+
           }}
         >
           <Loader color="teal" size="lg" variant="dots" />
@@ -108,25 +89,41 @@ function Products() {
         <>
           {proddet.map((item, index) => {
             return (
-              <Card key={index} radius="md" className={classes.card}>
-                <Card.Section className={classes.imageSection}>
+              <div className="cdn"
+                radius="sm"
+                style={{
+                  width: "250px",
+                  height: "330px",
+                 // backgroundColor: "#C1E1C1",
+                  margin: "10px",
+                  borderRadius: "5px",
+                }}
+              >
+                <div
+                  style={{
+                    width: "200px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
                   <Image
+                    style={{ width: "200" }}
                     src={item.images[0]}
-                    width={200}
-                    height={200}
-                    alt="Tesla Model S"
+                    // src={"https://img.icons8.com/emoji/600/000000/mobile-phone.png"}
+                    alt="image"
                   />
-                </Card.Section>
+                </div>
 
                 <Group position="apart" mt="md" width={300} height={300}>
                   <div>
-                    <Text weight={500}>{item.title}</Text>
+                    <Text weight={500}>{/* {item.title} */}</Text>
                     <Text size="xs" color="dimmed">
-                      {item.description}
+                      {/* {item.description} */}
                     </Text>
                   </div>
                   <Badge variant="outline">
-                    {item.discountPercentage}% off
+                    {/* {item.discountPercentage}% off */}
                   </Badge>
                 </Group>
                 <Card.Section
@@ -137,7 +134,7 @@ function Products() {
                   <Group spacing={30}>
                     <div>
                       <Text size="xl" weight={700} sx={{ lineHeight: 1 }}>
-                        ${item.price}
+                        {/* ${item.price} */}
                       </Text>
                       <Text
                         size="sm"
@@ -146,19 +143,28 @@ function Products() {
                         sx={{ lineHeight: 1 }}
                         mt={3}
                       >
-                        Ratings : {item.rating}
+                        {/* Ratings : {item.rating} */}
                       </Text>
                     </div>
                   </Group>
-                  <Group>
-                    <Link to={`/provu/${item.id}`}>
-                      <Button radius="xl" style={{ flex: 1 }}>
+
+                  {/* <Group>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Link to={`/provu/${item.id}`}>
+                      <Button variant="filled" color="dark" radius="sm">
                         View
                       </Button>
-                    </Link>
-                  </Group>
+                      </Link>
+                    </div>
+                  </Group> */}
                 </Card.Section>
-              </Card>
+              </div>
             );
           })}
         </>
