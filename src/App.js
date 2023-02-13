@@ -16,17 +16,17 @@ function App() {
     <div className="wrapper">
       <BrowserRouter>
         <Routes>
-          <Route path="/log" element={<Login />} />
-          <Route path="*" element={<Page404 />} />
           <Route path="/" element={<Portal />}>
-            <Route path="/head" element={<Header />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/prod" element={<Products />} />
-            <Route path="/provu" element={<Productview />} />
-            <Route path="/foo" element={<Footer />} />
+          <Route path="/" element={<Header />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/prod" element={<Products />} />
+          <Route path="/provu" element={<Productview />} />
+          <Route path="/foo" element={<Footer />} />
           </Route>
+          <Route path="/log" element={<Login  />} />
+          <Route path="*" element={<Page404 />} />
         </Routes>
       </BrowserRouter>
     </div>
