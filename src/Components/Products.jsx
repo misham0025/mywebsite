@@ -10,34 +10,29 @@ import {
   Button,
   Loader,
   Container,
+  SimpleGrid,
+  AspectRatio,
 } from "@mantine/core";
 
 import axios from "axios";
-import { Link } from "react-router-dom";
-import { useQuery } from "react-query";
+
 
 const useStyles = createStyles((theme) => ({
   card: {
-    backgroundColor: "#90EE90",
-    width: "500px",
-    Height: "900px",
-    margin: "10px",
+    transition: "transform 150ms ease, box-shadow 150ms ease",
+
+    "&:hover": {
+      transform: "scale(1.01)",
+      boxShadow: theme.shadows.md,
+    },
+    width:"500px",
+    height:"400px",
+    margin:"10px"
   },
 
-  imageSection: {},
-
-  label: {},
-
-  section: {
-    display: "flex",
-    justifyContent: "space-between",
-  },
-
-  icon: {
-    color:
-      theme.colorScheme === "dark"
-        ? theme.colors.dark[2]
-        : theme.colors.gray[5],
+  title: {
+    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+    fontWeight: 600,
   },
 }));
 
@@ -88,27 +83,31 @@ function Products() {
         <>
           {proddet.map((item, index) => {
             return (
-              <div className="cardhead">
-                <div className="cardimg">
-                  <img
-                    style={{ width: "100%" }}
-                    src={"item.images[0]"}
-                    // src={"https://img.icons8.com/emoji/600/000000/mobile-phone.png"}
-                    alt="image"
-                    width="250px"
-                    height={"250px"}
-                  />
-                </div>
-                <div>
 
-                </div>
-                <div>
-
-                </div>
-                <div>
-                  
-                </div>
-              </div>
+              <Card
+                key={index}
+                p="md"
+                radius="md"
+                component="a"
+                href="#"
+                className={classes.card}
+              >
+                <AspectRatio ratio={1920 / 1080}>
+                  <Image src={item.images[0]} />
+                </AspectRatio>
+                <Text
+                  color="dimmed"
+                  size="xs"
+                  transform="uppercase"
+                  weight={700}
+                  mt="md"
+                >
+                  {item.price}
+                </Text>
+                <Text className={classes.title} mt={5}>
+                  {item.description}
+                </Text>
+              </Card>
             );
           })}
         </>

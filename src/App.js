@@ -10,6 +10,7 @@ import Header from "./Components/Header";
 import About from "./Components/About";
 import Contact from "./Components/Contact";
 import Cart from "./Components/Cart";
+import { ForgotPassword } from "./Components/Forgetpassword";
 
 function App() {
   return (
@@ -17,15 +18,16 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Portal />}>
-          <Route path="/" element={<Header />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/prod" element={<Products />} />
-          <Route path="/provu" element={<Productview />} />
-          <Route path="/foo" element={<Footer />} />
+            <Route path="/" element={<Header />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/prod" element={<Products />} />
+            <Route path="/provu" element={<Productview />} />
+            <Route path="/foo" element={<Footer />} />
           </Route>
-          <Route path="/log" element={<Login  />} />
+          <Route path="/log" element={<Login />} />
+          <Route path="/forgetp" element={<ForgotPassword />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
       </BrowserRouter>
