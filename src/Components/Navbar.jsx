@@ -61,14 +61,17 @@ function Navbar() {
       // '@media (max-width: 1440px)': {
       //   width:"700px"
       //  },
-      "@media (min-width: 1024px) and (max-width: 2560px)": {
+      "@media (min-width: 1300px) and (max-width: 2560px)": {
         width: "650px",
       },
-      "@media (min-width: 768px) and (max-width: 1024px)": {
-        width: "400px",
+      "@media (min-width: 770px) and (max-width: 1024px)": {
+        width: "220px",
       },
-      "@media (min-width: 300px) and (max-width: 768px)": {
-        width: "180px",
+      "@media (min-width: 751px) and (max-width: 769px)": {
+       width:100
+      },
+      "@media (min-width: 300px) and (max-width: 750px)": {
+        width: "150px",
       },
     },
     subLink: {
@@ -153,11 +156,11 @@ function Navbar() {
       >
         <Group position="apart" sx={{ height: "100%" }}>
           <Group>
-            <img
+          <Link to={"/"}>  <img
               src="https://cdn-icons-png.flaticon.com/512/7838/7838457.png"
-              width={50}
+              width={30}
               alt=""
-            />
+            /></Link>
           </Group>
 
           <Group>
@@ -165,7 +168,7 @@ function Navbar() {
               icon={<IconSearch size={18} stroke={1.5} />}
               radius="md"
               placeholder="Search"
-              size="md"
+              size="sm"
               className={classes.textinput}
               onChange={(event) => setStringValue(event.currentTarget.value)}
             >
@@ -194,10 +197,10 @@ function Navbar() {
             </Link>
 
             { !localStorage.getItem("token") ? (
-             <Link ><Button color="teal" onClick={add}>LOGIN</Button></Link>
+             <Link to={"/log"}><Button color="teal">LOGIN</Button></Link>
             ) : (
               <div style={{ display: "flex", alignItems: "center" }}>
-                <Text style={{ paddingRight: "20px", color: "black" }}>
+                <Text style={{ paddingRight: "20px", color: "black"}}>
                   Hi' Misham
                 </Text>
                 <Button onClick={remove} variant="outline" color="red">
@@ -251,7 +254,7 @@ function Navbar() {
 
           <Group position="center" pb="xl" px="md">
             { !localStorage.getItem("token") ? (
-              <Link ><Button color="teal" onClick={add}>LOGIN</Button></Link>
+              <Link to={"/log"}><Button color="teal">LOGIN</Button></Link>
             ) : (
               <div style={{ display: "flex", alignItems: "center" }}>
                 <Text style={{ paddingRight: "20px", color: "black" }}>

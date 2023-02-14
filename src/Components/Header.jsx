@@ -58,8 +58,8 @@ const useStyles = createStyles((theme) => ({
 function Header() {
   const { classes } = useStyles();
   return (
-    <div>
-      <Container size="xl" px="xl">
+    <div style={{height:"100vh"}}>
+      <Container  size="xl" px="xl">
         <div className={classes.inner}>
           <div className={classes.content}>
             <Title className={classes.title}>
