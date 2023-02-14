@@ -11,6 +11,10 @@ import {
   ThemeIcon,
 } from "@mantine/core";
 import { IconCheck } from "@tabler/icons-react";
+import { Newspaper } from "./Newspaper";
+import Body from "./Body";
+import Contact from "./Contact";
+import { Carousel, Carouselcard } from "./Carousel";
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -58,8 +62,9 @@ const useStyles = createStyles((theme) => ({
 function Header() {
   const { classes } = useStyles();
   return (
-    <div style={{height:"100vh"}}>
-      <Container  size="xl" px="xl">
+    <div>
+    <div style={{ height: "70vh" }}>
+      <Container size="xl" px="xl">
         <div className={classes.inner}>
           <div className={classes.content}>
             <Title className={classes.title}>
@@ -116,6 +121,11 @@ function Header() {
           </div>
         </div>
       </Container>
+      </div>
+      <Body/>
+      <Carouselcard/>
+      <Newspaper />
+      <Contact/>
     </div>
   );
 }

@@ -12,10 +12,11 @@ import {
   Container,
   SimpleGrid,
   AspectRatio,
+  Divider,
 } from "@mantine/core";
 
 import axios from "axios";
-
+import { Bold } from "tabler-icons-react";
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -25,14 +26,18 @@ const useStyles = createStyles((theme) => ({
       transform: "scale(1.01)",
       boxShadow: theme.shadows.md,
     },
-    width:"500px",
-    height:"400px",
-    margin:"10px"
+    width: "500px",
+    height: "400px",
+    margin: "10px",
+    padding:"0px !important",
+   
   },
 
   title: {
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
     fontWeight: 600,
+    height: 100,
+    
   },
 }));
 
@@ -67,6 +72,7 @@ function Products() {
         flexWrap: "wrap",
       }}
     >
+       <Divider/>
       {loading ? (
         <div
           style={{
@@ -80,33 +86,23 @@ function Products() {
           <Loader color="teal" size="lg" variant="dots" />
         </div>
       ) : (
+        
         <>
+       
           {proddet.map((item, index) => {
             return (
-
-              <Card
-                key={index}
-                p="md"
-                radius="md"
-                component="a"
-                href="#"
-                className={classes.card}
-              >
+              <Card key={index} className={classes.card}>
                 <AspectRatio ratio={1920 / 1080}>
-                  <Image src={item.images[0]} />
+                  <Image src={item.images[1]} />
                 </AspectRatio>
-                <Text
-                  color="dimmed"
-                  size="xs"
-                  transform="uppercase"
-                  weight={700}
-                  mt="md"
-                >
-                  {item.price}
+                <div style={{padding:'10px'}}>
+                <Text size="xl" weight={500} mt="xs">
+                  ₹ {item.price}/-
                 </Text>
-                <Text className={classes.title} mt={5}>
+                <Text color="dimmed" className={classes.title} mt={5}>
                   {item.description}
                 </Text>
+                </div>
               </Card>
             );
           })}

@@ -27,7 +27,7 @@ import {
 } from "@mantine/core";
 import { MantineLogo } from "@mantine/ds";
 import { useDisclosure } from "@mantine/hooks";
-import { IconSearch, IconShoppingBag } from "@tabler/icons-react";
+import { IconSearch, IconShoppingBag,IconUserCircle  } from "@tabler/icons-react";
 
 
 function Navbar() {
@@ -200,9 +200,10 @@ function Navbar() {
              <Link to={"/log"}><Button color="teal">LOGIN</Button></Link>
             ) : (
               <div style={{ display: "flex", alignItems: "center" }}>
-                <Text style={{ paddingRight: "20px", color: "black"}}>
-                  Hi' Misham
-                </Text>
+               
+                <Link style={{textDecoration:"none"}} to={"/log"}><Text style={{ paddingRight: "20px", color: "black", justifyContent:"center",display:"flex"}}>
+                <IconUserCircle />&nbsp; Hi' Misham 
+                </Text></Link>
                 <Button onClick={remove} variant="outline" color="red">
                   LOGOUT
                 </Button>
@@ -257,8 +258,8 @@ function Navbar() {
               <Link to={"/log"}><Button color="teal">LOGIN</Button></Link>
             ) : (
               <div style={{ display: "flex", alignItems: "center" }}>
-                <Text style={{ paddingRight: "20px", color: "black" }}>
-                  Hi' Misham
+                 <Text style={{ paddingRight: "20px", color: "black", justifyContent:"center",display:"flex"}}>
+                <IconUserCircle />&nbsp; Hi' Misham 
                 </Text>
                 <Button onClick={remove} variant="outline" color="red">
                   LOGOUT
