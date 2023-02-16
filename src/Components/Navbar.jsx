@@ -1,5 +1,5 @@
 import React from "react";
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -27,8 +27,11 @@ import {
 } from "@mantine/core";
 import { MantineLogo } from "@mantine/ds";
 import { useDisclosure } from "@mantine/hooks";
-import { IconSearch, IconShoppingBag,IconUserCircle  } from "@tabler/icons-react";
-
+import {
+  IconSearch,
+  IconShoppingBag,
+  IconUserCircle,
+} from "@tabler/icons-react";
 
 function Navbar() {
   const useStyles = createStyles((theme) => ({
@@ -40,8 +43,8 @@ function Navbar() {
       paddingRight: theme.spacing.md,
       textDecoration: "none",
       color: theme.colorScheme === "dark" ? theme.white : theme.black,
-      fontWeight: 500,
-      fontSize: theme.fontSizes.sm,
+      fontWeight: 400,
+      fontSize: theme.fontSizes.md,
 
       [theme.fn.smallerThan("sm")]: {
         height: 42,
@@ -51,9 +54,10 @@ function Navbar() {
       },
 
       ...theme.fn.hover({
-        backgroundColor:
-          theme.colorScheme === "dark"
-            ? theme.colors.dark[6]
+        color:"#fff",
+        background:
+          theme.colorScheme === "light"
+            ? theme.colors.gray[9]
             : theme.colors.gray[0],
       }),
     },
@@ -68,7 +72,7 @@ function Navbar() {
         width: "220px",
       },
       "@media (min-width: 751px) and (max-width: 769px)": {
-       width:100
+        width: 100,
       },
       "@media (min-width: 300px) and (max-width: 750px)": {
         width: "150px",
@@ -123,18 +127,18 @@ function Navbar() {
 
   const { classes, theme } = useStyles();
   const [login, setLogin] = useState(true);
-  const [stringValue, setStringValue] = useState('');
+  const [stringValue, setStringValue] = useState("");
   const [data, setData] = useState([]);
-  const navigate=useNavigate()
-  const remove=()=>{
+  const navigate = useNavigate();
+  const remove = () => {
     localStorage.removeItem("token");
-    navigate("/")    
-  }
-  const add=()=>{
-    localStorage.setItem("token", Date.now())
-    navigate("/prod")
-  }
-  
+    navigate("/");
+  };
+  const add = () => {
+    localStorage.setItem("token", Date.now());
+    navigate("/prod");
+  };
+
   useEffect(() => {
     loadData();
   }, []);
@@ -144,23 +148,22 @@ function Navbar() {
       `https://dummyjson.com/products/search?q=${stringValue}`
     );
     let res = response.data;
-    setData(res.products)
+    setData(res.products);
     console.log(res.products);
   };
   return (
     <Box>
       <Header
-        style={{ border: "none", backgroundColor: "transparent" }}
-        height={60}
+        className="navbarheader"
+        height={70}
         px="md"
       >
         <Group position="apart" sx={{ height: "100%" }}>
           <Group>
-          <Link to={"/"}>  <img
-              src="https://cdn-icons-png.flaticon.com/512/7838/7838457.png"
-              width={30}
-              alt=""
-            /></Link>
+            <Link to={"/"}>
+            
+              <img src="https://pngimg.com/uploads/wings/wings_PNG37.png" width={50} alt="" />
+            </Link>
           </Group>
 
           <Group>
@@ -171,9 +174,7 @@ function Navbar() {
               size="sm"
               className={classes.textinput}
               onChange={(event) => setStringValue(event.currentTarget.value)}
-            >
-             
-            </TextInput>
+            ></TextInput>
           </Group>
           <Group
             sx={{ height: "100%" }}
@@ -183,28 +184,41 @@ function Navbar() {
             <Link to="/" className={classes.link}>
               Home
             </Link>
-            <Link to="/prod" className={classes.link}>
+            {/* <Link to="/prod" className={classes.link}>
               Products
             </Link>
             <Link to="/about" className={classes.link}>
               About
             </Link>
-            <Link to="/contact" className={classes.link} >
+            <Link to="/contact" className={classes.link}>
               Contact
             </Link>
             <Link to="/cart" className={classes.link}>
               <IconShoppingBag /> Cart
-            </Link>
+            </Link> */}
 
-            { !localStorage.getItem("token") ? (
-             <Link to={"/log"}><Button color="teal">LOGIN</Button></Link>
+            {localStorage.getItem("token") ? (
+              <Link to={"/log"}>
+                <Button radius="xs" color="dark.9">
+                  LOGIN
+                </Button>
+              </Link>
             ) : (
               <div style={{ display: "flex", alignItems: "center" }}>
-               
-                <Link style={{textDecoration:"none"}} to={"/log"}><Text style={{ paddingRight: "20px", color: "black", justifyContent:"center",display:"flex"}}>
-                <IconUserCircle />&nbsp; Hi' Misham 
-                </Text></Link>
-                <Button onClick={remove} variant="outline" color="red">
+                <Link style={{ textDecoration: "none" }} to={"/log"}>
+                  <Text
+                    style={{
+                      paddingRight: "20px",
+                      color: "black",
+                      justifyContent: "center",
+                      display: "flex",
+                    }}
+                  >
+                    <IconUserCircle stroke={1.0} />
+                    &nbsp; Hi' Misham
+                  </Text>
+                </Link>
+                <Button radius="xs" color="dark.9">
                   LOGOUT
                 </Button>
               </div>
@@ -245,8 +259,8 @@ function Navbar() {
             Contact
           </Link>
           <Link to="/cart" className={classes.link}>
-              <IconShoppingBag /> Cart
-            </Link>
+            <IconShoppingBag /> Cart
+          </Link>
 
           <Divider
             my="sm"
@@ -254,12 +268,22 @@ function Navbar() {
           />
 
           <Group position="center" pb="xl" px="md">
-            { !localStorage.getItem("token") ? (
-              <Link to={"/log"}><Button color="teal">LOGIN</Button></Link>
+            {!localStorage.getItem("token") ? (
+              <Link to={"/log"}>
+                <Button color="teal">LOGIN</Button>
+              </Link>
             ) : (
               <div style={{ display: "flex", alignItems: "center" }}>
-                 <Text style={{ paddingRight: "20px", color: "black", justifyContent:"center",display:"flex"}}>
-                <IconUserCircle />&nbsp; Hi' Misham 
+                <Text
+                  style={{
+                    paddingRight: "20px",
+                    color: "black",
+                    justifyContent: "center",
+                    display: "flex",
+                  }}
+                >
+                  <IconUserCircle />
+                  &nbsp; Hi' Misham
                 </Text>
                 <Button onClick={remove} variant="outline" color="red">
                   LOGOUT

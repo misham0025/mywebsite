@@ -1,131 +1,168 @@
-import React from "react";
-import {
-  createStyles,
-  Image,
-  Container,
-  Title,
-  Button,
-  Group,
-  Text,
-  List,
-  ThemeIcon,
-} from "@mantine/core";
-import { IconCheck } from "@tabler/icons-react";
-import { Newspaper } from "./Newspaper";
-import Body from "./Body";
-import Contact from "./Contact";
-import { Carousel, Carouselcard } from "./Carousel";
+import React, { useState, useEffect } from "react";
+import { Container, Grid } from "@mantine/core";
+import { IconEye, IconMessageCircle } from "@tabler/icons-react";
+import { Card, Text, Group, Center, createStyles } from "@mantine/core";
+import axios from "axios";
+import { useWindowScroll } from "@mantine/hooks";
+import { Button } from "@mantine/core";
 
-const useStyles = createStyles((theme) => ({
-  inner: {
-    display: "flex",
-    justifyContent: "space-between",
-    paddingTop: theme.spacing.xl * 4,
-    paddingBottom: theme.spacing.xl * 3,
-  },
+const useStyles = createStyles((theme, _params, getRef) => {
+  const image = getRef("image");
 
-  content: {
-    maxWidth: 700,
-    marginRight: theme.spacing.xl * 3,
-    [theme.fn.smallerThan("md")]: {
-      maxWidth: "100%",
-      marginRight: 0,
+  return {
+    card: {
+      position: "relative",
+      height: "500px",
+      width: "70%",
+      borderRadius: "10px",
+      marginBottom: "25px",
+      backgroundColor:
+        theme.colorScheme === "dark"
+          ? theme.colors.dark[6]
+          : theme.colors.gray[0],
+
+      [`&:hover .${image}`]: {
+        transform: "scale(1.03)",
+      },
     },
-  },
 
-  title: {
-    color: theme.colorScheme === "dark" ? theme.white : theme.black,
-    fontFamily: `Verdana, ${theme.fontFamily}`,
-    fontSize: 42,
-    lineHeight: 1.5,
-    fontWeight: 900,
-
-    [theme.fn.smallerThan("xs")]: {
-      fontSize: 28,
+    image: {
+      ref: image,
+      position: "absolute",
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundSize: "cover",
+      transition: "transform 500ms ease",
     },
-  },
 
-  control: {
-    [theme.fn.smallerThan("xs")]: {
-      flex: 1,
+    overlay: {
+      position: "absolute",
+      top: "20%",
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundImage:
+        "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .85) 90%)",
     },
-  },
 
-  image: {
-    flex: 1,
-    [theme.fn.smallerThan("md")]: {
-      display: "none",
+    content: {
+      height: "100%",
+      position: "relative",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "flex-end",
+      zIndex: 1,
     },
-  },
-}));
 
-function Header() {
-  const { classes } = useStyles();
+    title: {
+      color: theme.white,
+      marginBottom: 5,
+    },
+
+    bodyText: {
+      color: theme.colors.dark[2],
+      marginLeft: 7,
+    },
+
+    author: {
+      color: theme.colors.dark[2],
+    },
+  };
+});
+
+function Header({ image, title, author, views, comments, link }) {
+  const { classes, theme } = useStyles();
+  const [data, setdata] = useState([]);
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const loadData = async () => {
+    let response = await axios.get("https://dummyjson.com/products");
+    let res = response.data.products;
+    console.log(res);
+    setdata(res);
+  };
+  const [scroll, scrollTo] = useWindowScroll();
   return (
-    <div>
-    <div style={{ height: "70vh" }}>
-      <Container size="xl" px="xl">
-        <div className={classes.inner}>
-          <div className={classes.content}>
-            <Title className={classes.title}>
-              A Modern React Web Application
-            </Title>
-            <Text color="dimmed" mt="md" style={{ textAlign: "justify" }}>
-              Build fully functional accessible web applications faster than
-              ever – Mantine includes more than 120 customizable components and
-              hooks to cover you in any situation
-            </Text>
+    <div
+      style={{
+        width: "100%",
+        paddingTop: "30px",
+        height: "100vh",
+        backgroundColor: "transparent",
+      }}
+    >
+      <Container fluid>
+        <Grid justify="space-between" align="flex-start">
+          <Grid.Col span="auto" className="colone"></Grid.Col>
+          <Grid.Col span={7} className="coltwo">
+            <div className="coltwo_main"></div>
+            <div className="coltwo_sub">
+              {data.map((item, index) => {
+                return (
+                  <Card
+                    p="lg"
+                    shadow="lg"
+                    className={classes.card}
+                    key={index}
+                    component="a"
+                    href={link}
+                    target="_blank"
+                  >
+                    <div
+                      className={classes.image}
+                      style={{ backgroundImage: `url(${item.images[1]})` }}
+                    />
 
-            <List
-              mt={30}
-              spacing="sm"
-              size="sm"
-              icon={
-                <ThemeIcon color="teal" size={20} radius="xl">
-                  <IconCheck size={12} stroke={1.5} />
-                </ThemeIcon>
-              }
-            >
-              <List.Item>
-                <b>TypeScript based</b> – build type safe applications, all
-                components and hooks export types
-              </List.Item>
-              <List.Item>
-                <b>Free and open source</b> – all packages have MIT license, you
-                can use Mantine in any project
-              </List.Item>
-              <List.Item>
-                <b>No annoying focus ring</b> – focus ring will appear only when
-                user navigates with keyboard
-              </List.Item>
-            </List>
+                    <div className={classes.overlay} />
 
-            <Group mt={30}>
-              <Button color="teal" size="md">
-                Explore
-              </Button>
-            </Group>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Image
-              src="https://www.kindpng.com/picc/m/271-2713117_team-work-hd-png-download.png"
-              width={600}
-              className={classes.image}
-            />
-          </div>
-        </div>
+                    <div className={classes.content}>
+                      <div>
+                        <Text size="lg" className={classes.title} weight={500}>
+                          {item.title}
+                        </Text>
+
+                        <Group position="apart" spacing="xs">
+                          <Text size="sm" className={classes.author}>
+                            Rs {item.price}/-
+                          </Text>
+
+                          <Group spacing="lg">
+                            <Center>
+                              <IconEye
+                                size={16}
+                                stroke={1.5}
+                                color={theme.colors.dark[2]}
+                              />
+                              <Text size="sm" className={classes.bodyText}>
+                                {45}
+                              </Text>
+                            </Center>
+                            <Center>
+                              <IconMessageCircle
+                                size={16}
+                                stroke={1.5}
+                                color={theme.colors.dark[2]}
+                              />
+                              <Text size="sm" className={classes.bodyText}>
+                                {123}
+                              </Text>
+                            </Center>
+                          </Group>
+                        </Group>
+                      </div>
+                    </div>
+                  </Card>
+                );
+              })}
+            </div>
+          </Grid.Col>
+          <Grid.Col span="auto" className="colthree"></Grid.Col>
+        </Grid>
       </Container>
-      </div>
-      <Body/>
-      <Carouselcard/>
-      <Newspaper />
-      <Contact/>
     </div>
   );
 }
