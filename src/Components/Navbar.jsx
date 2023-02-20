@@ -66,7 +66,7 @@ function Navbar() {
       //   width:"700px"
       //  },
       "@media (min-width: 1300px) and (max-width: 2560px)": {
-        width: "750px",
+        width: "450px",
       },
       "@media (min-width: 770px) and (max-width: 1024px)": {
         width: "220px",
