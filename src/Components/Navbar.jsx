@@ -54,7 +54,7 @@ function Navbar() {
       },
 
       ...theme.fn.hover({
-        color:"#fff",
+        color: "#fff",
         background:
           theme.colorScheme === "light"
             ? theme.colors.gray[9]
@@ -66,7 +66,7 @@ function Navbar() {
       //   width:"700px"
       //  },
       "@media (min-width: 1300px) and (max-width: 2560px)": {
-        width: "650px",
+        width: "750px",
       },
       "@media (min-width: 770px) and (max-width: 1024px)": {
         width: "220px",
@@ -153,16 +153,15 @@ function Navbar() {
   };
   return (
     <Box>
-      <Header
-        className="navbarheader"
-        height={70}
-        px="md"
-      >
+      <Header className="navbarheader" height={50} px="md">
         <Group position="apart" sx={{ height: "100%" }}>
           <Group>
             <Link to={"/"}>
-            
-              <img src="https://pngimg.com/uploads/wings/wings_PNG37.png" width={50} alt="" />
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/1312/1312285.png"
+                width={40}
+                alt=""
+              />
             </Link>
           </Group>
 
@@ -182,10 +181,10 @@ function Navbar() {
             className={classes.hiddenMobile}
           >
             <Link to="/" className={classes.link}>
-              Home
+              News
             </Link>
-            {/* <Link to="/prod" className={classes.link}>
-              Products
+            <Link to="/prod" className={classes.link}>
+              Post Your Ad
             </Link>
             <Link to="/about" className={classes.link}>
               About
@@ -193,9 +192,7 @@ function Navbar() {
             <Link to="/contact" className={classes.link}>
               Contact
             </Link>
-            <Link to="/cart" className={classes.link}>
-              <IconShoppingBag /> Cart
-            </Link> */}
+           
 
             {localStorage.getItem("token") ? (
               <Link to={"/log"}>
@@ -246,21 +243,19 @@ function Navbar() {
         zIndex={1000000}
       >
         <ScrollArea sx={{ height: "calc(100vh - 60px)" }} mx="-md">
-          <Link to="/" className={classes.link}>
-            Home
-          </Link>
-          <Link to="/prod" className={classes.link}>
-            Products
-          </Link>
-          <Link to="/about" className={classes.link}>
-            About
-          </Link>
-          <Link to="/contact" className={classes.link}>
-            Contact
-          </Link>
-          <Link to="/cart" className={classes.link}>
-            <IconShoppingBag /> Cart
-          </Link>
+        <Link to="/" className={classes.link}>
+              News
+            </Link>
+            <Link to="/prod" className={classes.link}>
+              Post Your Ad
+            </Link>
+            <Link to="/about" className={classes.link}>
+              About
+            </Link>
+            <Link to="/contact" className={classes.link}>
+              Contact
+            </Link>
+           
 
           <Divider
             my="sm"
@@ -268,10 +263,12 @@ function Navbar() {
           />
 
           <Group position="center" pb="xl" px="md">
-            {!localStorage.getItem("token") ? (
+            {localStorage.getItem("token") ? (
               <Link to={"/log"}>
-                <Button color="teal">LOGIN</Button>
-              </Link>
+              <Button radius="xs" color="dark.9">
+                LOGIN
+              </Button>
+            </Link>
             ) : (
               <div style={{ display: "flex", alignItems: "center" }}>
                 <Text
@@ -285,7 +282,7 @@ function Navbar() {
                   <IconUserCircle />
                   &nbsp; Hi' Misham
                 </Text>
-                <Button onClick={remove} variant="outline" color="red">
+                <Button radius="xs" color="dark.9">
                   LOGOUT
                 </Button>
               </div>

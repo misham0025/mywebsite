@@ -1,170 +1,96 @@
-import React, { useState, useEffect } from "react";
-import { Container, Grid } from "@mantine/core";
-import { IconEye, IconMessageCircle } from "@tabler/icons-react";
-import { Card, Text, Group, Center, createStyles } from "@mantine/core";
-import axios from "axios";
-import { useWindowScroll } from "@mantine/hooks";
-import { Button } from "@mantine/core";
+import { Container } from '@mantine/core'
+import React from 'react'
+import {  Grid, SimpleGrid, Skeleton, useMantineTheme, Stack,AspectRatio, Image } from '@mantine/core';
 
-const useStyles = createStyles((theme, _params, getRef) => {
-  const image = getRef("image");
+const PRIMARY_COL_HEIGHT = 300;
+const getChild = (height) => <Skeleton height={height} radius="md" animate={false} />;
+const BASE_HEIGHT = 360;
+const getSubHeight = (children, spacing) =>
+  BASE_HEIGHT / children - spacing * ((children - 1) / children);
+  const child = <Skeleton height={140} radius="md" animate={false} />;
 
-  return {
-    card: {
-      position: "relative",
-      height: "500px",
-      width: "70%",
-      borderRadius: "10px",
-      marginBottom: "25px",
-      backgroundColor:
-        theme.colorScheme === "dark"
-          ? theme.colors.dark[6]
-          : theme.colors.gray[0],
-
-      [`&:hover .${image}`]: {
-        transform: "scale(1.03)",
-      },
-    },
-
-    image: {
-      ref: image,
-      position: "absolute",
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      backgroundSize: "cover",
-      transition: "transform 500ms ease",
-    },
-
-    overlay: {
-      position: "absolute",
-      top: "20%",
-      left: 0,
-      right: 0,
-      bottom: 0,
-      backgroundImage:
-        "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .85) 90%)",
-    },
-
-    content: {
-      height: "100%",
-      position: "relative",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "flex-end",
-      zIndex: 1,
-    },
-
-    title: {
-      color: theme.white,
-      marginBottom: 5,
-    },
-
-    bodyText: {
-      color: theme.colors.dark[2],
-      marginLeft: 7,
-    },
-
-    author: {
-      color: theme.colors.dark[2],
-    },
-  };
-});
-
-function Header({ image, title, author, views, comments, link }) {
-  const { classes, theme } = useStyles();
-  const [data, setdata] = useState([]);
-  useEffect(() => {
-    loadData();
-  }, []);
-
-  const loadData = async () => {
-    let response = await axios.get("https://dummyjson.com/products");
-    let res = response.data.products;
-    console.log(res);
-    setdata(res);
-  };
-  const [scroll, scrollTo] = useWindowScroll();
+function Header() {
+  const theme = useMantineTheme();
+  const SECONDARY_COL_HEIGHT = PRIMARY_COL_HEIGHT / 2 - theme.spacing.md / 2;
   return (
-    <div
-      style={{
-        width: "100%",
-        paddingTop: "30px",
-        height: "100vh",
-        backgroundColor: "transparent",
-      }}
-    >
-      <Container fluid>
-        <Grid justify="space-between" align="flex-start">
-          <Grid.Col span="auto" className="colone"></Grid.Col>
-          <Grid.Col span={7} className="coltwo">
-            <div className="coltwo_main"></div>
-            <div className="coltwo_sub">
-              {data.map((item, index) => {
-                return (
-                  <Card
-                    p="lg"
-                    shadow="lg"
-                    className={classes.card}
-                    key={index}
-                    component="a"
-                    href={link}
-                    target="_blank"
-                  >
-                    <div
-                      className={classes.image}
-                      style={{ backgroundImage: `url(${item.images[1]})` }}
-                    />
-
-                    <div className={classes.overlay} />
-
-                    <div className={classes.content}>
-                      <div>
-                        <Text size="lg" className={classes.title} weight={500}>
-                          {item.title}
-                        </Text>
-
-                        <Group position="apart" spacing="xs">
-                          <Text size="sm" className={classes.author}>
-                            Rs {item.price}/-
-                          </Text>
-
-                          <Group spacing="lg">
-                            <Center>
-                              <IconEye
-                                size={16}
-                                stroke={1.5}
-                                color={theme.colors.dark[2]}
-                              />
-                              <Text size="sm" className={classes.bodyText}>
-                                {45}
-                              </Text>
-                            </Center>
-                            <Center>
-                              <IconMessageCircle
-                                size={16}
-                                stroke={1.5}
-                                color={theme.colors.dark[2]}
-                              />
-                              <Text size="sm" className={classes.bodyText}>
-                                {123}
-                              </Text>
-                            </Center>
-                          </Group>
-                        </Group>
-                      </div>
-                    </div>
-                  </Card>
-                );
-              })}
-            </div>
+   <Container>
+    <div style={{width:"100%",marginBottom:"30px",marginTop:"10px"}}>
+<div className='headd' style={{width:"100%",height:"20px",display:"flex",alignItems:"center",justifyContent:"end",color:"#000",borderRadius:"5px"}}>
+  <text>PG : 1</text>
+</div>
+<div>
+ 
+      <SimpleGrid cols={1} style={{marginTop:"15px"}}  spacing="md" breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
+        <Skeleton height={PRIMARY_COL_HEIGHT} radius="md" animate={false} />
+        <Grid gutter="md">
+          <Grid.Col>
+            <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />
           </Grid.Col>
-          <Grid.Col span="auto" className="colthree"></Grid.Col>
+          <Grid.Col span={12}>
+            <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />
+          </Grid.Col>
+          <Grid.Col span={12}>
+            <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />
+          </Grid.Col>
         </Grid>
-      </Container>
+      </SimpleGrid>
+      <SimpleGrid style={{marginTop:"15px"}} cols={4} breakpoints={[{ maxWidth: 'xs', cols: 1 }]}>
+        {getChild(BASE_HEIGHT)}
+        <Stack>
+          {getChild(getSubHeight(2, theme.spacing.md))}
+          {getChild(getSubHeight(2, theme.spacing.md))}
+        </Stack>
+        <Stack>
+          {getChild(getSubHeight(3, theme.spacing.md))}
+          {getChild(getSubHeight(3, theme.spacing.md))}
+          {getChild(getSubHeight(3, theme.spacing.md))}
+        </Stack>
+        {getChild(BASE_HEIGHT)}
+      </SimpleGrid>
+      <SimpleGrid cols={2} style={{marginTop:"15px"}}  spacing="md" breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
+        <Skeleton height={PRIMARY_COL_HEIGHT} radius="md" animate={false} />
+        <Grid gutter="md">
+          <Grid.Col>
+            <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />
+          </Grid.Col>
+          <Grid.Col span={6}>
+            <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />
+          </Grid.Col>
+          <Grid.Col span={6}>
+            <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />
+          </Grid.Col>
+        </Grid>
+      </SimpleGrid>
+      <SimpleGrid style={{marginTop:"15px"}} cols={4} breakpoints={[{ maxWidth: 'xs', cols: 1 }]}>
+        {getChild(BASE_HEIGHT)}
+        <Stack>
+          {getChild(getSubHeight(2, theme.spacing.md))}
+          {getChild(getSubHeight(2, theme.spacing.md))}
+        </Stack>
+        <Stack>
+          {getChild(getSubHeight(3, theme.spacing.md))}
+          {getChild(getSubHeight(3, theme.spacing.md))}
+          {getChild(getSubHeight(3, theme.spacing.md))}
+        </Stack>
+        {getChild(BASE_HEIGHT)}
+      </SimpleGrid>
+
+</div>
     </div>
-  );
+
+
+    <AspectRatio ratio={720 / 1080} sx={{ maxWidth: 500 }} mx="auto">
+      <Image
+        src="https://images.unsplash.com/photo-1527118732049-c88155f2107c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=720&q=80"
+        alt="Panda"
+      />
+    </AspectRatio>
+
+
+
+
+    </Container>
+  )
 }
 
-export default Header;
+export default Header
