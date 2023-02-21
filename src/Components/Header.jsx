@@ -28,7 +28,7 @@ function Header() {
     <Newspaper/>
     <Container>
       <div style={{ width: "100%", marginBottom: "30px", marginTop: "10px" }}>
-        <div
+        {/* <div
           className="headd"
           style={{
             width: "100%",
@@ -41,11 +41,11 @@ function Header() {
           }}
         >
           <text>PG : 1</text>
-        </div>
+        </div> */}
         <div>
           <SimpleGrid
             cols={1}
-            style={{ marginTop: "15px" }}
+           // style={{ marginTop: "15px" }}
             spacing="md"
             breakpoints={[{ maxWidth: "sm", cols: 1 }]}
           >

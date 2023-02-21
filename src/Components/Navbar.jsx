@@ -31,6 +31,7 @@ import {
   IconSearch,
   IconShoppingBag,
   IconUserCircle,
+  IconBell,
 } from "@tabler/icons-react";
 
 function Navbar() {
@@ -165,7 +166,7 @@ function Navbar() {
             </Link>
           </Group>
 
-          <Group>
+          {/* <Group>
             <TextInput
               icon={<IconSearch size={18} stroke={1.5} />}
               radius="md"
@@ -174,15 +175,18 @@ function Navbar() {
               className={classes.textinput}
               onChange={(event) => setStringValue(event.currentTarget.value)}
             ></TextInput>
-          </Group>
+          </Group> */}
           <Group
             sx={{ height: "100%" }}
             spacing={0}
             className={classes.hiddenMobile}
           >
             <Link to="/" className={classes.link}>
-              News
+             Today's
             </Link>
+            <Link to="/prod" className={classes.link}>
+              Explore
+            </Link>   
             <Link to="/prod" className={classes.link}>
               Post Your Ad
             </Link>
@@ -192,9 +196,8 @@ function Navbar() {
             <Link to="/contact" className={classes.link}>
               Contact
             </Link>
-           
 
-            {localStorage.getItem("token") ? (
+            {!localStorage.getItem("token") ? (
               <Link to={"/log"}>
                 <Button radius="xs" color="dark.9">
                   LOGIN
@@ -211,11 +214,11 @@ function Navbar() {
                       display: "flex",
                     }}
                   >
-                    <IconUserCircle stroke={1.0} />
+                    <IconUserCircle stroke={1} />
                     &nbsp; Hi' Misham
                   </Text>
                 </Link>
-                <Button radius="xs" color="dark.9">
+                <Button radius="xs" variant="outline" color="dark.9">
                   LOGOUT
                 </Button>
               </div>
@@ -243,19 +246,27 @@ function Navbar() {
         zIndex={1000000}
       >
         <ScrollArea sx={{ height: "calc(100vh - 60px)" }} mx="-md">
-        <Link to="/" className={classes.link}>
-              News
-            </Link>
-            <Link to="/prod" className={classes.link}>
-              Post Your Ad
-            </Link>
-            <Link to="/about" className={classes.link}>
-              About
-            </Link>
-            <Link to="/contact" className={classes.link}>
-              Contact
-            </Link>
-           
+          <Link to="/" className={classes.link}>
+            News
+          </Link>
+          <Link to="/prod" className={classes.link}>
+            Explore
+          </Link>
+          <Link to="/prod" className={classes.link}>
+            Post Your Ad
+          </Link>
+          <Link to="/about" className={classes.link}>
+            About
+          </Link>
+          <Link to="/contact" className={classes.link}>
+            Contact
+          </Link>
+          <Link to="/contact" className={classes.link}>
+            <button type="button" class="icon-button">
+              <span class="material-icons">notifications</span>
+              {/* <span class="icon-button__badge">5</span> */}
+            </button>
+          </Link>
 
           <Divider
             my="sm"
@@ -263,12 +274,12 @@ function Navbar() {
           />
 
           <Group position="center" pb="xl" px="md">
-            {localStorage.getItem("token") ? (
+            {!localStorage.getItem("token") ? (
               <Link to={"/log"}>
-              <Button radius="xs" color="dark.9">
-                LOGIN
-              </Button>
-            </Link>
+                <Button radius="xs" color="dark.9">
+                  LOGIN
+                </Button>
+              </Link>
             ) : (
               <div style={{ display: "flex", alignItems: "center" }}>
                 <Text
@@ -282,7 +293,7 @@ function Navbar() {
                   <IconUserCircle />
                   &nbsp; Hi' Misham
                 </Text>
-                <Button radius="xs" color="dark.9">
+                <Button variant="outline" radius="xs" color="dark.9">
                   LOGOUT
                 </Button>
               </div>

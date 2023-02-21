@@ -11,15 +11,28 @@ function Newspaper() {
     "Friday",
     "Saturday",
   ];
+  let months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
   var today = new Date();
   var date =
     day[today.getDay()] +
     "," +
     " " +
+    months[today.getMonth()] + " "+
     today.getDate() +
-    "-" +
-    (today.getMonth() + 1) +
-    "-" +
+    " " +
     today.getFullYear();
 
   // useEffect(() => {
@@ -50,7 +63,7 @@ function Newspaper() {
   return (
     <div style={{ display: "flex", justifyContent: "space-between" }}>
       <text style={{ padding: "10px" }}>Coimbatore</text>
-      <text style={{ padding: "10px" }}>{date}</text>
+      <text style={{ padding: "10px",color:"grey",fontSize:"12px" }}>{date}</text>
     </div>
   );
 }

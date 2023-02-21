@@ -19,12 +19,11 @@ function Contact() {
   return (
     <div
     style={{
-      height:"50vh",
+      height:"100vh",
       width: "100%",
       display: "flex",
       alignItems:"center",
       justifyContent: "center",
-     paddingBottom:"35px",
     }}>
 
  <form onSubmit={form.onSubmit(() => {})}>
