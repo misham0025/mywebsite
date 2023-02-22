@@ -1,120 +1,96 @@
-import { Carousel } from '@mantine/carousel';
-import { useMediaQuery } from '@mantine/hooks';
-import { createStyles, Paper, Text, Title, Button, useMantineTheme } from '@mantine/core';
+import { createStyles, Text, Title, TextInput, Button, Image } from '@mantine/core';
+
 
 const useStyles = createStyles((theme) => ({
-  card: {
-    height: 440,
+  wrapper: {
     display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
+    alignItems: 'center',
+    padding: theme.spacing.xl * 2,
+    borderRadius: theme.radius.md,
+    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
+    border: `1px solid ${
+      theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[3]
+    }`,
+
+    [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
+      flexDirection: 'column-reverse',
+      padding: theme.spacing.xl,
+    },
+  },
+
+  image: {
+    maxWidth: '40%',
+
+    [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
+      maxWidth: '100%',
+    },
+  },
+
+  body: {
+    paddingRight: theme.spacing.xl * 4,
+
+    [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
+      paddingRight: 0,
+      marginTop: theme.spacing.xl,
+    },
   },
 
   title: {
+    color: theme.colorScheme === 'dark' ? theme.white : theme.black,
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-    fontWeight: 900,
-    color: theme.white,
-    lineHeight: 1.2,
-    fontSize: 32,
-    marginTop: theme.spacing.xs,
+    lineHeight: 1,
+    marginBottom: theme.spacing.md,
   },
 
-  category: {
-    color: theme.white,
-    opacity: 0.7,
-    fontWeight: 700,
-    textTransform: 'uppercase',
+  controls: {
+    display: 'flex',
+    marginTop: theme.spacing.xl,
+  },
+
+  inputWrapper: {
+    width: '100%',
+    flex: '1',
+  },
+
+  input: {
+    borderTopRightRadius: 0,
+    borderBottomRightRadius: 0,
+    borderRight: 0,
+  },
+
+  control: {
+    borderTopLeftRadius: 0,
+    borderBottomLeftRadius: 0,
   },
 }));
 
 
-
-function Card({ image, title, category }) {
+function Carousel() {
   const { classes } = useStyles();
-
   return (
-    <Paper
-      shadow="md"
-      p="xl"
-      radius="md"
-      sx={{ backgroundImage: `url(${image})` }}
-      className={classes.card}
-    >
-      <div>
-        <Text className={classes.category} size="md">
-          {category}
-        </Text>
-        <Title order={3} className={classes.title}>
-          {title}
-        </Title>
+    <div className={classes.wrapper}>
+          <Image src="https://www.pngmart.com/files/22/Avatar-PNG-File.png" className={classes.image} />
+
+    <div className={classes.body}>
+      <Title className={classes.title}>Wait a minute...</Title>
+      <Text weight={500} size="lg" mb={5}>
+        Subscribe to our newsletter!
+      </Text>
+      <Text size="sm" color="dimmed">
+        You will never miss important product updates, latest news and community QA sessions. Our
+        newsletter is once a week, every Sunday.
+      </Text>
+
+      <div className={classes.controls}>
+        <TextInput
+          placeholder="Your email"
+          classNames={{ input: classes.input, root: classes.inputWrapper }}
+        />
+        <Button className={classes.control}>Subscribe</Button>
       </div>
-      <Button variant="white" color="dark">
-        Read article
-      </Button>
-    </Paper>
-  );
+    </div>
+  </div>
+  )
 }
 
-const data = [
-  {
-    image:
-      'https://images.unsplash.com/photo-1508193638397-1c4234db14d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80',
-    title: 'Best forests to visit in North America',
-    category: 'nature',
-  },
-  {
-    image:
-      'https://images.unsplash.com/photo-1559494007-9f5847c49d94?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80',
-    title: 'Hawaii beaches review: better than you think',
-    category: 'beach',
-  },
-  {
-    image:
-      'https://images.unsplash.com/photo-1608481337062-4093bf3ed404?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80',
-    title: 'Mountains at night: 12 best locations to enjoy the view',
-    category: 'nature',
-  },
-  {
-    image:
-      'https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80',
-    title: 'Aurora in Norway: when to visit for best experience',
-    category: 'nature',
-  },
-  {
-    image:
-      'https://images.unsplash.com/photo-1510798831971-661eb04b3739?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80',
-    title: 'Best places to visit this winter',
-    category: 'tourism',
-  },
-  {
-    image:
-      'https://images.unsplash.com/photo-1582721478779-0ae163c05a60?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80',
-    title: 'Active volcanos reviews: travel at your own risk',
-    category: 'nature',
-  },
-];
-
-export function Carouselcard() {
-  const theme = useMantineTheme();
-  const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
-  const slides = data.map((item) => (
-    <Carousel.Slide key={item.title}>
-      <Card {...item} />
-    </Carousel.Slide>
-  ));
-
-  return (
-    <Carousel
-      slideSize="25%"
-      breakpoints={[{ maxWidth: 'sm', slideSize: '100%', slideGap: 2 }]}
-      slideGap="xl"
-      align="start"
-      slidesToScroll={mobile ? 1 : 2}
-    >
-      {slides}
-    </Carousel>
-  );
-}   
+export default Carousel

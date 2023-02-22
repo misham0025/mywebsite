@@ -1,6 +1,7 @@
 import React from 'react'
-import { TextInput, Textarea, SimpleGrid, Group, Title, Button } from '@mantine/core';
+import { TextInput, Textarea, SimpleGrid, Group, Title, Button, Container } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import Footer from './Footer';
 
 function Contact() {
   const form = useForm({
@@ -17,15 +18,8 @@ function Contact() {
     },
   });
   return (
-    <div
-    style={{
-      height:"100vh",
-      width: "100%",
-      display: "flex",
-      alignItems:"center",
-      justifyContent: "center",
-    }}>
-
+    <Container>
+<div>
  <form onSubmit={form.onSubmit(() => {})}>
       <Title
         order={2}
@@ -80,7 +74,11 @@ function Contact() {
         </Button>
       </Group>
     </form>
-  </div>
+    </div>
+    <div>
+      <Footer/>
+    </div>
+  </Container>
   )
 }
 

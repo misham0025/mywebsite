@@ -1,5 +1,5 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { Select } from "@mantine/core";
 
 function Newspaper() {
   var day = [
@@ -30,40 +30,30 @@ function Newspaper() {
     day[today.getDay()] +
     "," +
     " " +
-    months[today.getMonth()] + " "+
+    months[today.getMonth()] +
+    " " +
     today.getDate() +
     " " +
     today.getFullYear();
 
-  // useEffect(() => {
-  //   loadData();
-  // }, []);
-
-  // var config = {
-  //   method: 'get',
-  //   url: 'https://api.countrystatecity.in/v1/states',
-  //   headers: {
-  //     'X-CSCAPI-KEY': 'API_KEY'
-  //   }
-  // };
-
-  // const[data1,setdata1]=useState([])
-
-  // let loadData = async () => {
-  //   try {
-  //     let response = await axios.get("http://localhost:6826/allstates");
-  //     console.log(response.data[0].states);
-  //     setdata1(response.data[0].states);
-
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   }
-  // };
-
   return (
     <div style={{ display: "flex", justifyContent: "space-between" }}>
-      <text style={{ padding: "10px" }}>Coimbatore</text>
-      <text style={{ padding: "10px",color:"grey",fontSize:"12px" }}>{date}</text>
+      <div style={{ padding: "10px" }}>
+        <Select
+          placeholder="Select Location"
+          searchable
+          maxDropdownHeight={200}
+          size="xs"
+          onChange={(e) => {
+            console.log(e);
+          }}
+          nothingFound="Not Found"
+          data={["Ariyalur", "Chengalpet", "Chennai", "Coimbatore"]}
+        />
+      </div>
+      <text style={{ padding: "10px", color: "grey", fontSize: "12px" }}>
+        {date}
+      </text>
     </div>
   );
 }

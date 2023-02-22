@@ -158,11 +158,7 @@ function Navbar() {
         <Group position="apart" sx={{ height: "100%" }}>
           <Group>
             <Link to={"/"}>
-              <img
-                src="https://cdn-icons-png.flaticon.com/512/1312/1312285.png"
-                width={40}
-                alt=""
-              />
+             <Text className="font">LIFESTYLE</Text>
             </Link>
           </Group>
 
