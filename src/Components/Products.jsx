@@ -62,7 +62,7 @@ function Products() {
   };
 
   return (
-    <div
+    <Container fluid
       style={{
         display: "flex",
         justifyContent: "center",
@@ -83,7 +83,7 @@ function Products() {
             alignItems: "center",
           }}
         >
-          <Loader color="teal" size="lg" variant="dots" />
+          <Loader color="dark" size="lg" variant="dots" />
         </div>
       ) : (
         
@@ -108,7 +108,7 @@ function Products() {
           })}
         </>
       )}
-    </div>
+    </Container>
   );
 }
 

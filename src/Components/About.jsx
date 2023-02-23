@@ -80,7 +80,7 @@ function About() {
     },
   ];
   return (
-    <Container
+    <Container fluid
     // style={{
     //   height: "100vh",
     //   width: "100%",

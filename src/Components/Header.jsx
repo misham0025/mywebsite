@@ -18,7 +18,7 @@ function Header() {
   return (
     <>
       <Newspaper />
-      <Container>
+      <Container fluid>
         <div className="newsHeader">
           <Skeleton height="300vh" mb={10} radius="md" animate={true} />
           <Skeleton height="200vh" mb={10} radius="md" animate={false} />

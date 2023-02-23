@@ -18,7 +18,7 @@ function Contact() {
     },
   });
   return (
-    <Container>
+    <Container fluid>
 <div>
  <form onSubmit={form.onSubmit(() => {})}>
       <Title
