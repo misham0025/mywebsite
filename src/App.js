@@ -11,6 +11,7 @@ import About from "./Components/About";
 import Contact from "./Components/Contact";
 import Cart from "./Components/Cart";
 import { ForgotPassword } from "./Components/Forgetpassword";
+import Postad from "./Components/Postad";
 
 function App() {
   return (
@@ -22,8 +23,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/cart" element={<Cart />} />
-            <Route path="/prod" element={<Products />} />
-            <Route path="/provu" element={<Productview />} />
+            <Route path="/postad" element={<Postad />} />
             <Route path="/foo" element={<Footer />} />
           </Route>
           <Route path="/log" element={<Login />} />

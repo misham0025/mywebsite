@@ -180,10 +180,10 @@ function Navbar() {
             <Link to="/" className={classes.link}>
              Today's
             </Link>
-            <Link to="/prod" className={classes.link}>
+            <Link to="/postad" className={classes.link}>
               Explore
             </Link>   
-            <Link to="/prod" className={classes.link}>
+            <Link to="/postad" className={classes.link}>
               Post Your Ad
             </Link>
             <Link to="/about" className={classes.link}>
@@ -245,10 +245,10 @@ function Navbar() {
           <Link to="/" className={classes.link}>
             News
           </Link>
-          <Link to="/prod" className={classes.link}>
+          <Link to="/postad" className={classes.link}>
             Explore
           </Link>
-          <Link to="/prod" className={classes.link}>
+          <Link to="/postad" className={classes.link}>
             Post Your Ad
           </Link>
           <Link to="/about" className={classes.link}>

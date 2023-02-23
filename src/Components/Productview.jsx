@@ -1,106 +1,77 @@
-import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import axios from "axios";
-import { Loader } from '@mantine/core';
-import { IconHeart } from '@tabler/icons-react';
-import { Card, Image, Text, Group, Badge, Button, ActionIcon, createStyles } from '@mantine/core';
+import { useRef } from 'react';
+import { Text, Group, Button, createStyles } from '@mantine/core';
+import { Dropzone, MIME_TYPES } from '@mantine/dropzone';
+import { IconCloudUpload, IconX, IconDownload } from '@tabler/icons';
 
 const useStyles = createStyles((theme) => ({
-  card: {
-    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+  wrapper: {
+    position: 'relative',
+    marginBottom: 30,
   },
 
-  section: {
-    borderBottom: `1px solid ${
-      theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
-    }`,
-    paddingLeft: theme.spacing.md,
-    paddingRight: theme.spacing.md,
-    paddingBottom: theme.spacing.md,
+  dropzone: {
+    borderWidth: 1,
+    paddingBottom: 50,
   },
 
-  like: {
-    color: theme.colors.red[6],
+  icon: {
+    color: theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[4],
   },
 
-  label: {
-    textTransform: 'uppercase',
-    fontSize: theme.fontSizes.xs,
-    fontWeight: 700,
+  control: {
+    position: 'absolute',
+    width: 250,
+    left: 'calc(50% - 125px)',
+    bottom: -20,
   },
 }));
 
-
-function Productview() {
+export function DropzoneButton() {
   const { classes, theme } = useStyles();
-
-
-  const [secdata, setsecData] = useState({});
-  const params = useParams();
-
-  // useEffect(() => {
-  //   loadData();
-  // }, []);
-
-  // const loadData = async () => {
-  //   let response = await axios.get(
-  //     `https://dummyjson.com/products/${params.id}`
-  //   );
-  //   let res = response.data;
-  //   setsecData(res);
-  //   console.log(res);
-  // };
+  const openRef = useRef;
 
   return (
-    <div
-      style={{
-        height:"100vh",
-        width: "100%",
-        display: "flex",
-        alignItems:"center",
-        justifyContent: "center",
-       
-      }}
-    >
-      {/* <Text>Coming Soon</Text><Loader color="teal" size="lg" variant="dots" /> */}
+    <div className={classes.wrapper}>
+      <Dropzone
+        openRef={openRef}
+        onDrop={() => {}}
+        className={classes.dropzone}
+        radius="md"
+        accept={[MIME_TYPES.pdf]}
+        maxSize={30 * 1024 ** 2}
+      >
+        <div style={{ pointerEvents: 'none' }}>
+          <Group position="center">
+            <Dropzone.Accept>
+              <IconDownload size={50} color={theme.colors[theme.primaryColor][6]} stroke={1.5} />
+            </Dropzone.Accept>
+            <Dropzone.Reject>
+              <IconX size={50} color={theme.colors.red[6]} stroke={1.5} />
+            </Dropzone.Reject>
+            <Dropzone.Idle>
+              <IconCloudUpload
+                size={50}
+                color={theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black}
+                stroke={1.5}
+              />
+            </Dropzone.Idle>
+          </Group>
 
-<Card withBorder radius="md" p="md" className={classes.card}>
-      <Card.Section>
-        <Image src={''} alt={''} height={180} />
-      </Card.Section>
-
-      <Card.Section className={classes.section} mt="md">
-        <Group position="apart">
-          <Text size="lg" weight={500}>
-            {'title'}
+          <Text align="center" weight={700} size="lg" mt="xl">
+            <Dropzone.Accept>Drop files here</Dropzone.Accept>
+            <Dropzone.Reject>Pdf file less than 30mb</Dropzone.Reject>
+            <Dropzone.Idle>Upload resume</Dropzone.Idle>
           </Text>
-          <Badge size="sm">{'country'}</Badge>
-        </Group>
-        <Text size="sm" mt="xs">
-          {'description'}
-        </Text>
-      </Card.Section>
+          <Text align="center" size="sm" mt="xs" color="dimmed">
+            Drag&apos;n&apos;drop files here to upload. We can accept only <i>.pdf</i> files that
+            are less than 30mb in size.
+          </Text>
+        </div>
+      </Dropzone>
 
-      <Card.Section className={classes.section}>
-        <Text mt="md" className={classes.label} color="dimmed">
-          Perfect for you, if you enjoy
-        </Text>
-        <Group spacing={7} mt={5}>
-          {'features'}
-        </Group>
-      </Card.Section>
-
-      <Group mt="xs">
-        <Button radius="md" style={{ flex: 1 }}>
-          Show details
-        </Button>
-        <ActionIcon variant="default" radius="md" size={36}>
-          <IconHeart size={18} className={classes.like} stroke={1.5} />
-        </ActionIcon>
-      </Group>
-    </Card>
+      <Button className={classes.control} size="md" radius="xl" onClick={() => openRef.current?.()}>
+        Select files
+      </Button>
     </div>
   );
 }
-
-export default Productview;
